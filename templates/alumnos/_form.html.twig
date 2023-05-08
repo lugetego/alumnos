@@ -1,0 +1,150 @@
+{{ form_start(form) }}
+<hr class="container">
+
+
+    <div class="row mt-2">
+        <div class="col-6">
+            <div class="form-floating">
+                {{ form_widget(form.nombre, {'attr': {'class': 'form-control','placeholder':'Nombre(s)'}}) }}
+                {{ form_label(form.nombre,'Nombre(s)') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.nombre) }}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                {{ form_widget(form.apellidos, {'attr': {'class': 'form-control','placeholder':'Apellido(s)'}}) }}
+                {{ form_label(form.nombre,'Apellido(s)') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.nombre) }}
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6">
+            <div class="form-floating">
+                {{ form_widget(form.correoinst, {'attr': {'class': 'form-control','placeholder':'Dominio @matmor.unam.mx o de alguna otra institución'}}) }}
+                {{ form_label(form.correoinst,'Correo institucional (dominio @matmor.unam.mx o de alguna otra institución)') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.correoinst) }}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                {{ form_widget(form.correo, {'attr': {'class': 'form-control','placeholder':'Correo personal'}}) }}
+                {{ form_label(form.correo,'Correo personal') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.correo) }}
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6">
+            <div class="form-floating">
+                {{ form_widget(form.asesor, {'attr': {'class': 'form-control','placeholder':'Asesor dentro del PCCM'}}) }}
+                {{ form_label(form.asesor,'Asesor dentro del PCCM') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.asesor) }}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                {{ form_widget(form.areas, {'attr': {'class': 'form-control','placeholder':'Áreas matemáticas de interés'}}) }}
+                {{ form_label(form.areas,'Áreas matemáticas de interés, puedes separarlas por comas ","') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.areas) }}
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="alert alert-light" role="alert">
+            Para realizar tu descripción de intereses (académicos) y líneas de investigación, puedes revisar los perfiles
+            de los profesores en <a href="https://matmor.unam.mx/personal/investigadores" target="_blank" class="alert-link">el directorio del CCM</a>,
+            especialmente la sección "Resumen" al final de cada perfil.
+        </div>
+        <div class="col-12">
+            <div class="form-floating">
+                {{ form_widget(form.intereses, {'attr': {'class': 'form-control','placeholder':'Descripción de intereses (académicos) y líneas de investigación',
+                'style':'height: 250px;'}}) }}
+                {{ form_label(form.intereses,'Descripción de intereses (académicos) y líneas de investigación') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.intereses) }}
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <div class="form-floating">
+                {{ form_widget(form.grado, {'attr': {'class': 'form-control','placeholder':'Grado'}}) }}
+                {{ form_label(form.grado,'Grado') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.grado) }}
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-floating">
+                {{ form_widget(form.semestre, {'attr': {'class': 'form-control','placeholder':'Semestre'}}) }}
+                {{ form_label(form.semestre,'Semestre') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.semestre) }}
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-floating">
+                {{ form_widget(form.pagina, {'attr': {'class': 'form-control','placeholder':'Página personal'}}) }}
+                {{ form_label(form.pagina,'Página personal') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.pagina) }}
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-floating">
+                {{ form_widget(form.cubiculo, {'attr': {'class': 'form-control','placeholder':'Cubículo en el CCM'}}) }}
+                {{ form_label(form.pagina,'Cubículo en el CCM') }}
+            </div>
+            <div class="invalid-error invalid-feedback">
+                {{ form_errors(form.cubiculo) }}
+            </div>
+        </div>
+    </div>
+<hr>
+    <div class="row mt-2">
+
+        <div class="col-6">
+
+
+            <div class="form-check form-switch mt-2">
+
+        {{ form_row(form.aviso, {
+            label: '¿Aceptas el aviso de privacidad para que tu información pueda ser publicada?',
+            attr: {
+                placeholder: 'Aviso de privacidad',
+                class: 'form-check-input'
+            },
+            label_attr: {
+                class: 'form-check-label'
+            }
+        }) }}
+            </div>
+        </div>
+        <div class="alert alert-light" role="alert">
+            <a href="https://matmor.unam.mx/aviso-simplificado" class="alert-link" target="_blank"><i class="fa-solid fa-link"></i> Leer aviso de privacidad</a>
+        </div>
+    </div>
+
+
+{{ form_widget(form) }}
+<div class="d-grid gap-2 pt-4 mb-2 col-3 mx-auto">
+    <button class="btn btn-dark"><h5> <i class="fa-regular fa-paper-plane"></i> {{ button_label|default('Enviar registro') }}</h5></button>
+</div>        {{ form_end(form) }}
+

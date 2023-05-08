@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Directorio de alumnos en el CCM{% endblock %}
+
+ {% block header %}
+
+
+
+ {% endblock %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-body">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <p class="text-end">
+                    <a class="btn-sm btn-dark btn mx-auto" href="{{ path('app_alumnos_edit', {'slug': alumno.slug}) }}"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                </p>
+            {% endif %}
+
+            <h5 class="card-title">{{ alumno.nombre }} {{ alumno.apellidos }}</h5>
+            <em class="text-muted">{{ alumno.grado }}, semestre {{ alumno.semestre }} </em>
+            <p class="card-text mt-2">
+                <em>
+                    {% set correo = alumno.correo|split('@') %}
+                    {{ correo[0] }}<i class="fa-solid fa-at"></i>{{correo[1] }},
+                    {% set inst = alumno.correoinst|split('@') %}
+                    {{ inst[0] }}<i class="fa-solid fa-at"></i>{{inst[1] }}
+                </em>
+            </p>
+            <p class="card-text mt-2">
+                <strong>Asesor:</strong> {{ alumno.asesor }}
+            </p>
+            <p class="card-text mt-2">
+                <strong>Áreas de interés:</strong> {{ alumno.areas }}
+            </p>
+            <p class="card-text mt-2">
+                <strong>Intereses:</strong> {{ alumno.intereses }}
+            </p>
+            <p class="card-text mt-2">
+                {% if alumno.pagina != null %}
+                    <a href="{{alumno.pagina}}"> {{ alumno.pagina }}</a>
+                {%endif%}
+            </p>
+            <p class="card-text mt-2">
+                <strong>Cubículo:</strong> {{ alumno.cubiculo }}
+            </p>
+        </div>
+    </div>
+    {% block footer %}{% endblock %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ include('alumnos/_delete_form.html.twig') }}
+    {% endif %}
+
+{% endblock %}

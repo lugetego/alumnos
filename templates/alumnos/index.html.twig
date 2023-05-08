@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Alumnos CCM{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+{% endblock %}
+
+{% block body %}
+
+    <table id="example" class="mt-5 table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo institucional</th>
+                <th>Cubiculo</th>
+                <th>Asesor</th>
+                <th>Grado</th>
+                <th>Semestre</th>
+                <th>Aviso</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for alumno in alumnos %}
+            <tr>
+                <td>{{ alumno.nombre }}</td>
+                <td>{{ alumno.apellidos }}</td>
+                <td>{{ alumno.correoinst }}</td>
+                <td>{{ alumno.cubiculo }}</td>
+                <td>{{ alumno.asesor }}</td>
+                <td>{{ alumno.grado }}</td>
+                <td>{{ alumno.semestre }}</td>
+                <td>{{ alumno.aviso ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_alumnos_show', {'slug': alumno.slug}) }}">show</a>
+                    <a href="{{ path('app_alumnos_edit', {'slug': alumno.slug}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_alumnos_new') }}">Create new</a>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
+
+{% endblock %}

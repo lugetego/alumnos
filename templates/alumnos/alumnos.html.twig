@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Directorio de alumnos en el CCM{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+{% endblock %}
+
+{% block body %}
+    <table id="example" class="mt-5 table table-striped" style="width:100%">
+        <thead>
+        <tr>
+            <th class="text-center">Nombre(s)</th>
+            <th class="text-center">Apellido (s)</th>
+            <th class="text-center">Correo institucional</th>
+            <th class="text-center">Asesor</th>
+            <th class="text-center">Grado</th>
+            <th class="text-center">Contacto</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for alumno in alumnos %}
+            <tr>
+                <td>
+                    <div {{ stimulus_controller('modal-form', {
+                        formUrl: path('app_alumnos_show',{'slug':alumno.slug})
+                    }) }}>
+                        <button
+                                class="btn btn-link"
+                                data-action="modal-form#openModal"
+                        >{{ alumno.nombre }} </button>
+                        {{ include('alumnos/_modal.html.twig', {
+                            modalTitle: 'Contacto',
+                        }) }}
+                    </div>
+                </td>
+                <td>{{ alumno.apellidos }}</td>
+                {% set inst = alumno.correoinst|split('@') %}
+                <td>{{ inst[0] }}<i class="fa-solid fa-at"></i>{{inst[1] }}</td>
+                <td>{{ alumno.asesor }}</td>
+                <td>{{ alumno.grado }}</td>
+                <td>
+                    <div {{ stimulus_controller('modal-form', {
+                        formUrl: path('app_alumnos_show',{'slug':alumno.slug})
+                    }) }}>
+                        <button
+                                class="btn btn-dark btn-sm "
+                                data-action="modal-form#openModal"
+                        ><i class="fa-solid fa-address-book"></i> </button>
+                        {{ include('alumnos/_modal.html.twig', {
+                            modalTitle: 'Contacto',
+                        }) }}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a class="btn-sm btn-dark btn" href="{{ path('app_alumnos_edit', {'slug': alumno.slug}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('app_alumnos_new') }}">Nuevo registro</a>
+    {% endif %}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
+
+{% endblock %}
