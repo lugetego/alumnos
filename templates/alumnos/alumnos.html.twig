@@ -10,8 +10,8 @@
     <table id="example" class="mt-5 table table-striped" style="width:100%">
         <thead>
         <tr>
-            <th class="text-center">Nombre(s)</th>
-            <th class="text-center">Apellido (s)</th>
+            <th class="text-center">Nombre</th>
+{#            <th class="text-center">Apellido (s)</th>#}
             <th class="text-center">Correo institucional</th>
             <th class="text-center">Asesor</th>
             <th class="text-center">Grado</th>
@@ -28,13 +28,13 @@
                         <button
                                 class="btn btn-link"
                                 data-action="modal-form#openModal"
-                        >{{ alumno.nombre }} </button>
+                        >{{ alumno.nombre }} {{ alumno.apellidos }} </button>
                         {{ include('alumnos/_modal.html.twig', {
                             modalTitle: 'Contacto',
                         }) }}
                     </div>
                 </td>
-                <td>{{ alumno.apellidos }}</td>
+{#                <td>{{ alumno.apellidos }}</td>#}
                 {% set inst = alumno.correoinst|split('@') %}
                 <td>{{ inst[0] }}<i class="fa-solid fa-at"></i>{{inst[1] }}</td>
                 <td>{{ alumno.asesor }}</td>
