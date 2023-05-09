@@ -34,7 +34,7 @@
                 <strong>Áreas de interés:</strong> {{ alumno.areas }}
             </p>
             <p class="card-text mt-2">
-                <strong>Intereses:</strong> {{ alumno.intereses }}
+                <em>"{{alumno.intereses}}"</em>
             </p>
             <p class="card-text mt-2">
                 {% if alumno.pagina != null %}
@@ -48,6 +48,13 @@
     </div>
     {% block footer %}{% endblock %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p class="card-text mt-2">
+            <strong>Registro creado:</strong> {{alumno.created|date}}
+        </p>
+        <p class="card-text mt-2">
+            <strong>Registro modificado:</strong> {{alumno.modified|date}}
+        </p>
+
             {{ include('alumnos/_delete_form.html.twig') }}
     {% endif %}
 

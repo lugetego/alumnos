@@ -52,9 +52,11 @@
                 {{ form_errors(form.asesor) }}
             </div>
         </div>
-        <div class="col-6">
+    </div>
+        <div class="row mt-2">
+        <div class="col-12">
             <div class="form-floating">
-                {{ form_widget(form.areas, {'attr': {'class': 'form-control','placeholder':'Áreas matemáticas de interés'}}) }}
+                {{ form_widget(form.areas, {'attr': {'class': 'form-control','placeholder':'Áreas matemáticas de interés', 'style':'height: 80px;'}}) }}
                 {{ form_label(form.areas,'Áreas matemáticas de interés, puedes separarlas por comas ","') }}
             </div>
             <div class="invalid-error invalid-feedback">
