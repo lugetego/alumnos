@@ -81,9 +81,7 @@ class AlumnosType extends AbstractType
                 ],
                 'placeholder' => 'Seleccionar',
             ])
-            ->add('aviso',null, [
-                'required'=>true,
-            ])
+            ->add('aviso')
         ;
     }
 

@@ -30,9 +30,20 @@ class AlumnosController extends AbstractController
      */
     public function index(AlumnosRepository $alumnosRepository): Response
     {
-        return $this->render('alumnos/alumnos.html.twig', [
-            'alumnos' => $alumnosRepository->findAll(),
-        ]);
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->render('alumnos/alumnos.html.twig', [
+                'alumnos' => $alumnosRepository->findAll(),
+            ]);
+
+        }
+        else {
+            return $this->render('alumnos/alumnos.html.twig', [
+                'alumnos' => $alumnosRepository->findByAviso(true),
+            ]);
+
+        }
+
     }
 
     /**

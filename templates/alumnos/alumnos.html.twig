@@ -52,6 +52,10 @@
                         }) }}
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <a class="btn-sm btn-dark btn" href="{{ path('app_alumnos_edit', {'slug': alumno.slug}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            {% if alumno.aviso == false %}
+                                <span class="badge bg-warning text-dark">Inactivo</span>
+
+                            {%endif%}
                         {% endif %}
                     </div>
                 </td>
